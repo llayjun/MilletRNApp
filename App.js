@@ -22,6 +22,7 @@ import MerchantDetailPage from './res/page/merchant_detail/merchant_detail';
 import TaskDetailPage from './res/page/task_detail/task_detail';
 import Storage from './res/util/storage_util';
 import {BASE_URL, TokenKey} from './res/const/const';
+import SplashScreen from 'react-native-splash-screen'
 
 const navigationRef = React.createRef();
 
@@ -38,19 +39,16 @@ class App extends Component {
   state = {initName: 'Login'}
 
   componentDidMount() {
-    this._boot()
-  }
-
-  _boot = async () => {
-    const tokenValue = await Storage.load({key: TokenKey})
-    console.log(tokenValue)
-    this.setState({initName: (tokenValue != null && tokenValue != '' )? 'Main': 'Login'})
+    setTimeout(()=>{
+      SplashScreen.hide()
+    }, 3000, )
+    
   }
 
   render() {
     return(
-      <NavigationContainer ref={navigationRef}>
-        <Stack.Navigator initialRouteName={this.state.initName} headerMode={'none'}>
+      <NavigationContainer ref={navigationRef} >
+        <Stack.Navigator initialRouteName={'Login'} headerMode={'none'} >
           {/* 登录 */}
           <Stack.Screen name="Login" component={LoginPage} />
           {/* 注册 */}

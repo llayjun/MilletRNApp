@@ -16,13 +16,27 @@ class LoginPage extends Component {
         super(props);
     } 
 
+    // 判断登录跳转
+    async jump() {
+        try {
+            const tokenValue = await Storage.load({key: TokenKey})
+            if(tokenValue != '' && tokenValue != null) {
+                RootNavigation.navigate('Main')
+            }
+        } catch (error) {
+            console.log(error)
+        }
+        
+    }
+
     // 登录
     login(callback) {
         let data = {'mobile': this.state.username, 'passWord': this.state.password};
         NetUtil.postJson(BASE_URL + 'api/app/users/userLogin', data, callback, '');
-      }
+    }
 
     render() {
+        this.jump()
         return (
             <View style={{backgroundColor: 'white'}}>
                 <StatusBar backgroundColor='transparent' translucent barStyle={'dark-content'} />
