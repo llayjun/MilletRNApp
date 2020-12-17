@@ -16,6 +16,10 @@ class LoginPage extends Component {
         super(props);
     } 
 
+    UNSAFE_componentWillMount() {
+        this.jump()
+    }
+
     // 判断登录跳转
     async jump() {
         try {
@@ -36,7 +40,6 @@ class LoginPage extends Component {
     }
 
     render() {
-        this.jump()
         return (
             <View style={{backgroundColor: 'white'}}>
                 <StatusBar backgroundColor='transparent' translucent barStyle={'dark-content'} />
