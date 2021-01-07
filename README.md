@@ -18,4 +18,4 @@ $ ./gradlew assembleRelease
 
 4. APK包
 账号： 1 密码：1
-[RN APK包下载](https://download.csdn.net/download/llayjun/13710929)
+[RN APK包下载](https://download.csdn.net/download/llayjun/14040536)
