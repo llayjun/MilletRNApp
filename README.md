@@ -2,8 +2,11 @@
 Millet项目的app，使用React Native
 
 #### Android版本打包
+```
 $ cd android
 $ ./gradlew assembleRelease
+```
+> apk地址在android/app/build/outputs/apk/release中
 
 1. 项目效果图
 ![在这里插入图片描述](https://img-blog.csdnimg.cn/20201217113234962.gif)

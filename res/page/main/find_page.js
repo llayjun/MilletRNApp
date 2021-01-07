@@ -80,7 +80,7 @@ class FindPage extends Component {
 
     render() {
         return (
-            <View style={{backgroundColor: 'white'}}>
+            <View style={{backgroundColor: 'white', height: '100%'}}>
                 <StatusBar backgroundColor='transparent' translucent barStyle={'dark-content'} />
                 <View style={{marginTop: statusBarHeight}}></View>
                 <MyHeader leftImageView={null}>任务</MyHeader>
