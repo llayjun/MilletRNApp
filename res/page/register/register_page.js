@@ -1,5 +1,5 @@
 import React, {Component} from 'react';
-import { Alert, Button, TextInput, Text, View, StyleSheet, StatusBar, ToastAndroid } from 'react-native';
+import { Alert, Button, TextInput, Text, View, StyleSheet, StatusBar, TouchableOpacity, Keyboard} from 'react-native';
 import MyButton from '../../widget/my_button';
 import MyHeader from '../../widget/my_header';
 import {statusBarHeight} from '../../util/apdater_util';
@@ -7,7 +7,7 @@ import * as RootNavigation from '../../../App';
 import NetUtil from '../../net/net_util';
 import {BASE_URL, TokenKey} from '../../const/const';
 import Storage from '../../util/storage_util';
-
+import Toast, {DURATION} from 'react-native-easy-toast';
 
 class RegisterPage extends Component {
 
@@ -21,7 +21,10 @@ class RegisterPage extends Component {
 
       render() {
         return (
-            <View style={{backgroundColor: 'white'}}>
+            <TouchableOpacity onPress={() => {
+                Keyboard.dismiss()
+            }} activeOpacity={1} style={{flex: 1}}>
+                <View style={{backgroundColor: 'white'}}>
                 <StatusBar backgroundColor='transparent' translucent barStyle={'dark-content'} />
                 <View style={{marginTop: statusBarHeight}}></View>
                 <MyHeader
@@ -61,30 +64,32 @@ class RegisterPage extends Component {
                             style={{height: 40, padding: 0, backgroundColor: '#7bbfea', borderRadius: 4, marginTop: 40}}
                             onPress={() => {
                                 if (this.state.username === '') {
-                                    ToastAndroid.show('请输入姓名', 10000)
+                                    this.toast.show('请输入姓名', 10000)
                                     return
                                 }
                                 if (this.state.phonenum === '') {
-                                    ToastAndroid.show('请输入手机号', 10000)
+                                    this.toast.show('请输入手机号', 10000)
                                     return
                                 }
                                 if (this.state.password === '') {
-                                    ToastAndroid.show('请输入密码', 10000)
+                                    this.toast.show('请输入密码', 10000)
                                     return
                                 }
                                 this.register((info) => {
                                     if(info.code == 0) {
-                                        ToastAndroid.show(info.msg, 10000)
+                                        this.toast.show(info.msg, 10000)
                                         this.props.navigation.popToTop()
                                         return
                                     } else {
-                                        ToastAndroid.show(info.msg, 10000)
+                                        this.toast.show(info.msg, 10000)
                                         return
                                     }
                                 })
                             }}>注册</MyButton>
                 </View>
+                <Toast ref={(toast) => this.toast = toast}/>
             </View>
+            </TouchableOpacity>
         );
     }
 

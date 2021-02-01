@@ -9,7 +9,7 @@ import NetUtil from '../../net/net_util';
 import Storage from '../../util/storage_util';
 import {BASE_URL, TokenKey, TEST_IMG} from '../../const/const';
 import * as RootNavigation from '../../../App';
-import CardView from 'react-native-cardview'
+import CardView from 'react-native-cardview';
 
 const topList = [
     {
@@ -148,7 +148,7 @@ class MinePage extends Component {
                         </View>
                         {/* card */}
                         <CardView
-                            style={{margin: 20}}
+                            style={{margin: 20, backgroundColor: 'white'}}
                             height={100}
                             cardElevation={2}
                             cardMaxElevation={2}

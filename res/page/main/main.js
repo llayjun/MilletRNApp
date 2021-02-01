@@ -1,8 +1,9 @@
 import React, { Component } from 'react';
 
-import {BackHandler, Platform, ToastAndroid} from 'react-native';
+import {BackHandler, Platform} from 'react-native';
 import { createBottomTabNavigator} from '@react-navigation/bottom-tabs';
 import {Alert, Image} from 'react-native';
+import Toast, {DURATION} from 'react-native-easy-toast';
 
 
 import HomeScreen from './home_page';
@@ -86,7 +87,7 @@ class MyTabs extends Component {
                   BackHandler.exitApp();//直接退出APP
                 }else{
                   this.lastBackPressed = Date.now();
-                  ToastAndroid.show('再按一次退出应用', 1000);//提示
+                  this.toast.show('再按一次退出应用', 1000);//提示
                   return true;
                 }
             }

@@ -1,5 +1,5 @@
 import React, {Component} from 'react';
-import { Alert, Button, TextInput, Text, View, StyleSheet, StatusBar, ToastAndroid } from 'react-native';
+import { Alert, Button, TextInput, Text, View, StyleSheet, StatusBar, TouchableOpacity, Keyboard } from 'react-native';
 import CheckBox from '../../widget/check_box';
 import MyButton from '../../widget/my_button';
 import {statusBarHeight} from '../../util/apdater_util';
@@ -7,6 +7,7 @@ import NetUtil from '../../net/net_util';
 import Storage from '../../util/storage_util';
 import {BASE_URL, TokenKey} from '../../const/const';
 import * as RootNavigation from '../../../App';
+import Toast, {DURATION} from 'react-native-easy-toast';
 
 class LoginPage extends Component {
 
@@ -41,7 +42,10 @@ class LoginPage extends Component {
 
     render() {
         return (
-            <View style={{backgroundColor: 'white'}}>
+            <TouchableOpacity onPress={() => {
+                Keyboard.dismiss()
+            }} activeOpacity={1} style={{flex: 1}}>
+                <View style={{backgroundColor: 'white'}}>
                 <StatusBar backgroundColor='transparent' translucent barStyle={'dark-content'} />
                 <View style={{marginTop: statusBarHeight}}></View>
                 <Text onPress={() => {this.props.navigation.push('Register')}} style={{fontSize: 18, textAlign: 'right', paddingRight: 20, paddingTop: 10} }>注册</Text>
@@ -87,16 +91,16 @@ class LoginPage extends Component {
                             disabled={this.state.disabled}
                             onPress={() => {
                                 if (this.state.username === '') {
-                                    ToastAndroid.show('请输入账号', 10000)
+                                    this.toast.show('请输入账号', 10000)
                                     return
                                 }
                                 if (this.state.password === '') {
-                                    ToastAndroid.show('请输入密码', 10000)
+                                    this.toast.show('请输入密码', 10000)
                                     return
                                 }
                                 this.login((info) => {
                                     if(info.code == 0) {
-                                        ToastAndroid.show(info.msg, 10000)
+                                        this.toast.show(info.msg, 10000)
                                         // 存储用户Token
                                         Storage.save({
                                             key: TokenKey,
@@ -105,7 +109,7 @@ class LoginPage extends Component {
                                         RootNavigation.navigate('Main')
                                         return
                                     } else {
-                                        ToastAndroid.show(info.msg, 10000)
+                                        this.toast.show(info.msg, 10000)
                                         return
                                     }
                                 })
@@ -113,7 +117,9 @@ class LoginPage extends Component {
                     {/* < */}
                     {/* <Button title={'登录'} onPress={() => this.props.navigation.push('Main')}></Button> */}
                 </View>
+                <Toast ref={(toast) => this.toast = toast}/>
             </View>
+            </TouchableOpacity>
         );
     }
 

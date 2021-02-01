@@ -1,11 +1,12 @@
 import React, {Component} from 'react';
-import { Text, View, Image, StatusBar, FlatList, ToastAndroid, TouchableWithoutFeedback } from 'react-native';
+import { Text, View, Image, StatusBar, FlatList, TouchableWithoutFeedback } from 'react-native';
 import {statusBarHeight} from '../../util/apdater_util';
 import MyHeader from '../../widget/my_header';
 import Storage from '../../util/storage_util';
 import {BASE_URL, TokenKey} from '../../const/const';
 import NetUtil from '../../net/net_util';
 import * as RootNavigation from '../../../App';
+import Toast, {DURATION} from 'react-native-easy-toast';
 
 const BottomItem = ({image, title, content, merchantName, money, callBack}) => {
     return (
@@ -55,7 +56,7 @@ class FindPage extends Component {
             this.getReTask();
         }else{
             //若总数未满一屏，进去就提示
-            ToastAndroid.show('已加载全部', 1000);
+            this.toast.show('已加载全部', 1000);
         }
     }
 
@@ -104,6 +105,7 @@ class FindPage extends Component {
                     keyExtractor={item => item.id}
                   >
                 </FlatList>
+                <Toast ref={(toast) => this.toast = toast}/>
             </View>
         );
     }
